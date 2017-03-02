@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+	  <title>Agenda-Of-Day</title>
+	  <%= stylesheet_link_tag    "application", "session", :media => "all", 'data-turbolinks-track' => true %>
+	  <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+	  <%= csrf_meta_tags %>
+	</head>
+
+  <body style="background-color:#1C1C1C">
+    <%= form_for(:session, :url => {:action => 'create'}, :html => {:class => 'form-signin', :role => 'form'}) do |f| -%>
+      <div class="login-body" style="background-color:#E8E8E8">
+        <h3 class="form-signin-heading"><%#= image_tag 'logo_agpr.png', size: "80x50" %>&nbsp<b>Agenda-Of-Day</b></h3>
+        <% if flash[:notice] %>
+          <div class="alert alert-danger" role="alert"><%= flash[:notice] %></div>
+        <% end %>
+        <%= f.email_field :email, {autofocus: true, :class => "form-control", :placeholder => "Email", :required => 'required'} %>
+        <br />
+        <div class="form-group">
+         <%= f.password_field :password, {autocomplete: "off", :class => "form-control", :placeholder => "Password", :required => 'required'} %>
+        </div>
+      </div>
+      <footer style="background-color:#E8E8E8">
+        <%= f.submit 'Login', :class => "btn btn-primary" %>
+        <!-- <label class="checkbox">
+          <input type="checkbox" value="conecte-me"> Permanecer conectado
+        </label>
+        <br> -->
+        <%= link_to "Criar Conta", new_usuario_path, :class => 'btn btn-default pull-right disabled' %>
+      </footer>
+    <% end -%>
+  </body>
+</html>
+
+<style>
+  b{font-family: Courier 10 Pitch; font-size: 18px;}
+</style>

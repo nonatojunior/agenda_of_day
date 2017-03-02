@@ -1,0 +1,2 @@
+$("#adicionar-novo-compromisso").html("<%= escape_javascript(render partial: 'compromissos/form', locals: {compromisso: @compromisso}) %>");
+$("#adicionar-novo-compromisso .modal").modal('show');

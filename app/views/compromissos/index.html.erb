@@ -1,0 +1,54 @@
+<% if flash[:notice] %>
+  <div class="alert alert-success" role="alert"><%= flash[:notice] %></div>
+<% end %>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Agendar Compromissos</h3>
+  </div>
+  <div class="panel-body">
+    <div class="table-responsive">
+      <div id="calendar">
+        <h2 id="month">
+          <%= link_to '<', :month => (@date.beginning_of_month-1).strftime("%Y-%m-%d") %>
+          <%=h l(@date, :format => :ano_mes) %>
+          <%= link_to '>', :month => (@date.end_of_month+1).strftime("%Y-%m-%d") %>
+        </h2>
+        <%= calendar_for @compromissos, :year => @date.year, :month => @date.month do |t| %>
+          <%= t.head('DOM','SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SAB') %>
+          <%= t.day do |day, compromissos| %>
+            <p class="led_amarelo"><b><%= day.day %></b></p><%= link_to('<i class="fa fa-plus fa-lg"></i>'.html_safe, { controller: :compromissos, action: :new, data: day }, remote: true, title: 'Adicionar novo compromisso.', class: 'btn btn-primary btn-xs pull-right') %>
+            <center><a href="#"><%= link_to("Ver ", action: :meus_compromissos, data: day) %><span class="badge"><%= compromissos.count %></span></a></center>
+            <!-- <%# compromissos.each do |compromisso| %><br> -->
+              <%#= link_to h(compromisso.titulo[0..12]), compromisso, :title => "* #{compromisso.titulo.empty? ? 'NÃO CONSTA TÍTULO PARA O COMPROMISSO!' : compromisso.titulo}\n    - #{compromisso.descricao.empty? ? 'NÃO CONSTA DESCRIÇÃO PARA O COMPROMISSO!' : compromisso.descricao }" %>
+              <%#= link_to '<i class="fa fa-pencil fa-lg"></i>'.html_safe, edit_compromisso_path(compromisso), remote: true %>
+              <%#= link_to '<i class="fa fa-trash fa-lg"></i>'.html_safe, compromisso, method: :delete, data: { confirm: 'Tem certeza?' } %>
+            <%# end %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <br>
+    <center><%= link_to 'Adicionar Compromisso', new_compromisso_path, class: 'btn btn-primary', remote: true %></center>
+  </div>
+</div>
+
+<style type="text/css">
+  .led_amarelo {
+    background-color: #FBFB9D;
+    /*color: black;*/
+    width:2em;
+    height:2em;
+    line-height:2em;
+    vertical-align:middle;
+    text-align:center;
+    border-radius:50%;
+    border-radius:50%;
+    border-radius:50%;
+    display:inline-block;
+    margin-right: 1%;
+    max-width: 100%;
+    max-height: 100%;
+  }
+</style>
+
+<div id="adicionar-novo-compromisso"></div>

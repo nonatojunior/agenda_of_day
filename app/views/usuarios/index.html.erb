@@ -1,0 +1,19 @@
+<h1> Usuários </h1>
+<table>
+   <thead>
+     <tr>
+       <th>Nome</th>
+       <th>Email</th>
+       <th></th>
+     </tr>
+   </thead>
+   <tbody>
+     <% @usuarios.each do |usuario| %>
+       <tr>
+         <td><%= usuario.nome %></td>
+         <td><%= usuario.email %></td>
+         <td><%= link_to "Show", usuario %></td>
+       </tr>
+    <%end%>
+  </tbody>
+</table>

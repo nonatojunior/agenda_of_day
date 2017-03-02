@@ -1,0 +1,67 @@
+<script type="text/javascript">
+  $(function() {
+    $(".datepicker").datepicker({
+      dateFormat: 'dd/mm/yy',
+      dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
+      dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
+      dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+      monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+      monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
+      nextText: 'Próximo',
+      prevText: 'Anterior'
+    });
+  });
+</script>
+
+<div id="adicionar-novo-compromisso" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Compromisso</h4>
+      </div>
+      <div class="modal-body">
+        <%= form_for(@compromisso) do |f| %>
+          <% if @compromisso.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@compromisso.errors.count, "error") %> prohibited this compromisso from being saved:</h2>
+
+              <ul>
+              <% @compromisso.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <div class="field">
+            <%= f.label :titulo, 'Título' %><br>
+            <%= f.text_field :titulo, class: 'form-control' %>
+          </div>
+          <br />
+          <div class="field">
+            <%= f.label :descricao, 'Descrição' %><br>
+            <%= f.text_area :descricao, class: 'form-control' %>
+          </div>
+          <br />
+          <div class="field">
+            <%= f.label :date, 'Data' %><br>
+            <% if params[:data] %>
+              <%= f.text_field :date, :value => params[:data].to_date, class: 'datepicker form-control', required: true %>
+            <% else %>
+              <%= f.text_field :date, class: 'datepicker form-control', required: true %>
+              <%#= f.date_select :date, class: 'form-control' %>
+            <% end %>
+          </div>
+          <br />
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+            <%= f.submit 'Salvar', class: 'btn btn-primary' %>
+          </div>
+        <% end %>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+

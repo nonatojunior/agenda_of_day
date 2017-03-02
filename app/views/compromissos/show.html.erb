@@ -1,0 +1,26 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Compromisso</h3>
+  </div>
+  <div class="panel-body">
+		<p>
+		  <strong>Título:</strong>
+		  <%= @compromisso.titulo %>
+		</p>
+
+		<p>
+		  <strong>Descrição:</strong>
+		  <%= @compromisso.descricao %>
+		</p>
+
+		<p>
+		  <strong>Data:</strong>
+		  <%= l(@compromisso.date, format: :long) if @compromisso.date %>
+		</p>
+
+		<%= link_to 'Editar', edit_compromisso_path(@compromisso), remote: true, class: 'btn btn-primary' %>
+		<%= link_to 'Voltar', compromissos_path, class: 'btn btn-primary' %>
+  </div>
+</div>
+
+<div id="adicionar-novo-compromisso"></div>
